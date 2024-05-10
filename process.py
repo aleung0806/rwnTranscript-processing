@@ -6,6 +6,7 @@ import re
 import os
 import whisperx
 import time
+import torch
 
 device = "cpu" 
 audio_file = "rwn.mp3"
@@ -70,7 +71,7 @@ def main():
     rss = xmltodict.parse(rss_xml)
 
     #load whisper model
-    model = whisperx.load_model("base", device, compute_type=compute_type, language=language)
+    model = whisperx.load_model("base", device, compute_type=compute_type, language=language, asr_options={'beam_size': 5})
 
     #process each episode
 
@@ -85,11 +86,11 @@ def main():
         download_audio(ep_info)
 
         t = time.process_time() - t
-        log('mp3 downloaded: ' + str(t))
+        log(ep_info['ep_number'] + ' downloaded: ' + str(t))
 
         transcribe(ep_info, model)
         t = time.process_time() - t
-        log('episode transcribed: ' + str(t))
+        log(ep_info['ep_number'] + ' transcribed' + str(t))
 
         delete_mp3(ep_info)
 

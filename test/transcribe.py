@@ -9,21 +9,21 @@ load_dotenv()
 HF_TOKEN = os.getenv('HF_TOKEN')
 
 device = "cpu" 
-audio_file = "443.mp3"
+audio_file = "1.mp3"
 batch_size = 4
 compute_type = "int8"
 language="en"
 
 t = time.process_time()
 
-model = whisperx.load_model("small", device, compute_type=compute_type, language=language)
+model = whisperx.load_model("small", device, compute_type=compute_type, language=language, asr_options={'beam_size': 5})
 
 t = time.process_time() - t
 pprint(t)
 
 
 audio = whisperx.load_audio(audio_file)
-result = model.transcribe(audio, batch_size=batch_size)
+result = model.transcribe(audio, batch_size=batch_size, print_progress=True)
 
 t = time.process_time() - t
 pprint(t)
