@@ -11,10 +11,13 @@ device = "cpu"
 audio_file = "rwn.mp3"
 batch_size = 4
 compute_type = "int8"
-language="en"
+language = "en"
+
+log_path = 'process.log'
 
 def log(message):
-    with open('process.log', "a") as log_file:
+    with open(log_path, "a") as log_file:
+        print(message)
         pprint(message, log_file)
 
 def transcribe(ep_info, model):
@@ -56,7 +59,7 @@ def extact_info_from_feed(item):
     
 def main():
 
-
+    os.remove(log_path)
     t = time.process_time()
 
     #open rss feed xml
@@ -67,7 +70,7 @@ def main():
     rss = xmltodict.parse(rss_xml)
 
     #load whisper model
-    model = whisperx.load_model("small", device, compute_type=compute_type, language=language)
+    model = whisperx.load_model("base", device, compute_type=compute_type, language=language)
 
     #process each episode
 

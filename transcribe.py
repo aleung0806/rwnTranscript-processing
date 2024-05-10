@@ -9,7 +9,7 @@ load_dotenv()
 HF_TOKEN = os.getenv('HF_TOKEN')
 
 device = "cpu" 
-audio_file = "rwn.mp3"
+audio_file = "443.mp3"
 batch_size = 4
 compute_type = "int8"
 language="en"

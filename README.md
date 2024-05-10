@@ -1,1 +1,1 @@
-python script for fetching RWN transcripts and running whisper models
+python script for fetching RWN episodes and running whisperx
