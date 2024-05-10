@@ -7,8 +7,8 @@ from whisper_transcribe import transcribe
 import os
 
 
-def format_transcription(item, result):
-    title = 
+# def format_transcription(item, result):
+#     title = 
 
 def transcribe(paths):
     print('transcribing episode', paths['ep_number'])
